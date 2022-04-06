@@ -12,3 +12,5 @@ global_costmap:
   always_send_full_costmap: false
 
   static_map: true
+
+  footprint_padding : 0.05
