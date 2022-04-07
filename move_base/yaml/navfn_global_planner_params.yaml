@@ -10,5 +10,8 @@ NavfnROS:
   # use_dijkstra : true
   # use_grid_path : false
 
-  neutral_cost : 30
-  cost_factor : 1.0
+  cost_factor : 0.5
+  neutral_cost : 66
+  
+  orientation_mode : 0
+
