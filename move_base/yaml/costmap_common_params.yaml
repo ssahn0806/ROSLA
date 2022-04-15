@@ -1,8 +1,10 @@
 obstacle_range : 1.5 # 2.5
 raytrace_range : 5.0 # 3.0
 footprint: [ [0.314, 0.275], [0.314, -0.275], [-0.314, -0.275], [-0.314, 0.275]]
+# footprint : [[0.3,0.27], [0.3, -0.27], [-0.3, -0.27], [-0.3, 0.27]]
+# footprint: [ [0.274, 0.26], [0.274, -0.26], [-0.274, -0.235], [-0.274, 0.235]]
 
-inflation_radius : 0.3 # 0.55
+# inflation_radius : 0.4 # 0.55
 cost_scaling_factor : 5.0
 observation_sources: laser_scan_sensor
 laser_scan_sensor: {
@@ -11,4 +13,7 @@ laser_scan_sensor: {
   data_type: LaserScan,
   clearing: true,
   marking: true,
+  obstacle_range : 1.5, # 2.5
+  raytrace_range : 5.0 # 3.0
 }
+

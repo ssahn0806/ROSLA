@@ -8,10 +8,10 @@ NavfnROS:
   # old_navfn_behavior : false
   # use_quadratic : true
   # use_dijkstra : true
-  # use_grid_path : false
+  use_grid_path : true
 
   cost_factor : 0.5
-  neutral_cost : 66
+  neutral_cost : 80
   
   orientation_mode : 0
 
