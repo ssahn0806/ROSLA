@@ -46,10 +46,10 @@ DWAPlannerROS:
   acc_lim_y : 0.0
 
   max_vel_trans : 0.7
-  min_vel_trans : 0.0
+  min_vel_trans : -0.5
 
   max_vel_x : 0.7
-  min_vel_x : 0.0
+  min_vel_x : -0.5
 
   max_vel_y : 0.0
   min_vel_y : 0.0
@@ -61,7 +61,7 @@ DWAPlannerROS:
   xy_goal_tolerance : 0.2
   latch_xy_goal_tolerance : true
 
-  sim_time : 2.0
+  sim_time : 3.0
   sim_granularity: 0.05
 
   vx_samples : 20
@@ -74,7 +74,9 @@ DWAPlannerROS:
   goal_distance_bias : 9.0
   occdist_scale : 0.02
   forward_point_distance : 0.325
-  stop_time_buffer : 0.5
+  stop_time_buffer : 1.0
+
+  escape_vel : -0.05
 
   oscillation_reset_dist : 0.05
 

@@ -1,7 +1,7 @@
 global_costmap:
   global_frame: map
   robot_base_frame: base_link
-  update_frequency: 5.0
+  update_frequency: 10.0
 
   transform_tolerance : 0.1
 
@@ -12,4 +12,4 @@ global_costmap:
   always_send_full_costmap: false
 
   footprint_padding : 0.05
-  inflation_radius : 0.35
+  inflation_radius : 0.3
