@@ -8,10 +8,10 @@ NavfnROS:
   neutral_cost : 66
   cost_factor : 0.55
 
-  allow_unknown : true
-  use_dijkstra : true
-  use_quadratic : true
-  use_grid_path : false
-  old_navfn_behavior : false
+  allow_unknown : false
+  # use_dijkstra : true
+  # use_quadratic : true
+  # use_grid_path : false
+  # old_navfn_behavior : false
   
   visualize_potential : true
