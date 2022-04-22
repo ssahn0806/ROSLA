@@ -13,7 +13,7 @@ DWAPlannerROS:
   max_vel_y : 0.0
   min_vel_y : 0.0
 
-  max_vel_theta : 1.0 #1.0
+  max_vel_theta : 0.8 #1.0
   min_vel_theta : 0.2 #0.4
 
   #tolerance
@@ -37,9 +37,9 @@ DWAPlannerROS:
 
   occdist_scale : 0.01 #0.01
   forward_point_distance : 0.325
-  stop_time_buffer : 1.0 #0.2
+  stop_time_buffer : 0.5 #0.2
 
-  scaling_speed : 0.4 #0.25
+  scaling_speed : 0.3 #0.25
   max_scaling_factor : 0.2
 
   publish_cost_grid : false

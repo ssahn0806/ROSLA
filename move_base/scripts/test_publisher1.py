@@ -96,24 +96,23 @@ class GoalPubNode:
         self.goal_lst.append(Point(0.8026,11.9794,0.0)) # 0.8202, 11.9073
 
         # 2nd parking
-        self.goal_lst.append(Point(-2.60,8.30,0)) # -2.57, 8.12
+        self.goal_lst.append(Point(-2.64,8.33,0)) # -2.57, 8.12
 
         # 3rd parking(1)
 
-        # self.goal_lst.append(Point(2.51,6.20,0)) # 2.50, 6.31
-        self.goal_lst.append(Point(2.00,7.34,0)) # 2.50, 6.31
+        self.goal_lst.append(Point(2.09,6.42,0)) # 2.50, 6.31
 
         # 3rd parking(2)
-        # self.goal_lst.append(Point(2.93,4.82,0)) # -2.57, 8.12
+        # self.goal_lst.append(Point(2.87,4.87,0)) # -2.57, 8.12
 
         # 4rd Point
-        self.goal_lst.append(Point(8.70,-18.62,0)) # 2.50, 6.31
+        self.goal_lst.append(Point(8.31,-17.42,0)) # 9.09, -18.78
 
         # 5th Point
-        self.goal_lst.append(Point(15.19,-10.31,0)) # 15.12, -10.32
+        self.goal_lst.append(Point(15.90,-10.05,0)) # 16.29,-9.40
 
         # End Point
-        self.goal_lst.append(Point(13.02,-2.11,0)) # 12.92 , -2.27
+        self.goal_lst.append(Point(13.0533,-2.3557,0)) # 12.92 , -2.27
         
 
        
@@ -127,23 +126,22 @@ class GoalPubNode:
         self.ori_lst.append(Quaternion(0,0,0.7865,0.6175))
 
         # 2nd parking
-        self.ori_lst.append(Quaternion(0,0,-0.63,0.77))
+        self.ori_lst.append(Quaternion(0,0,-0.61,0.78))
 
         # 3rd parking(1)
-        self.ori_lst.append(Quaternion(0,0,0.86,0.50))
+        self.ori_lst.append(Quaternion(0,0,0.77,0.62))
 
-        # self.ori_lst.append(Quaternion(0,0,-0.64,0.75))
-
-        # self.ori_lst.append(Quaternion(0,0,0.60,0.79))
+        # 3rd parking(2)
+        # self.ori_lst.append(Quaternion(0,0,-0.55,0.83))
 
         # 4rd Point
-        self.ori_lst.append(Quaternion(0,0,-0.60,0.79))
+        self.ori_lst.append(Quaternion(0,0,0.77,0.62))
 
         # 5th Point
-        self.ori_lst.append(Quaternion(0,0,-0.99,0.08))
+        self.ori_lst.append(Quaternion(0,0,0.19,0.98))
 
         # End Point
-        self.ori_lst.append(Quaternion(0,0,0.47,0.88))
+        self.ori_lst.append(Quaternion(0,0,0.883,0.9960))
 
 
 
@@ -219,14 +217,35 @@ class GoalPubNode:
             self.cancel_pub.publish(finish_goal)
             self.is_stop = True
 
-            if self.idx == 0:
-                
+            if self.idx == 0:                
                 rospy.loginfo('sleep 4sec')
                 rospy.sleep(4.0) 
                 rospy.loginfo('sleep end')
+                rospy.set_param('/move_base/DWAPlanerROS/yaw_goal_tolerance',1.57)
+                rospy.set_param('/move_base/DWAPlanerROS/xy_goal_tolerance',0.2)
+                # rospy.set_param('/move_base/DWAPlanerROS/occdist_scale',0.03)
+            if self.idx == 1:
+                rospy.set_param('/move_base/DWAPlannerROS/yaw_goal_tolerance',3.14)
+            elif self.idx == self.LENGTH-3:
+                rospy.set_param('move_base/DWAPlannerROS/max_vel_x',1.0)
+                rospy.set_param('move_base/DWAPlannerROS/min_vel_x',-1.0)
+
+                rospy.set_param('move_base/DWAPlannerROS/max_vel_trans',1.0)
+                rospy.set_param('move_base/DWAPlannerROS/min_vel_trans',-1.0)
+
+
+            if self.idx == self.LENGTH-2:
+                rospy.set_param('move_base/DWAPlannerROS/max_vel_x',1.5)
+                rospy.set_param('move_base/DWAPlannerROS/min_vel_x',-1.5)
+
+                rospy.set_param('move_base/DWAPlannerROS/max_vel_trans',1.5)
+                rospy.set_param('move_base/DWAPlannerROS/min_vel_trans',-1.5)
+
+                rospy.set_param('/move_base/DWAPlannerROS/yaw_goal_tolerance',0.05)
+                rospy.set_param('/move_base/DWAPlanerROS/xy_goal_tolerance',0.05)
+                # rospy.set_param('/move_base/DWAPlanerROS/occdist_scale',0.02)
 
             self.idx +=1
-            # rospy.set_param('/move_base/DWAPlanerROS/yaw_goal_tolerance',3.14)
             
             if self.idx < self.LENGTH:     
                 new_goal = PoseStamped()
