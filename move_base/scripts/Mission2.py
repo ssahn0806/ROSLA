@@ -60,7 +60,7 @@ class GoalPubNode:
         self.is_finish = False
         
         self.LENGTH = 0
-        self.dist_TH = 0.15
+        self.dist_TH = 0.08
         self.deg_TH = 5
         
         self.goal_pub = rospy.Publisher('/move_base_simple/goal',PoseStamped,queue_size=5)
@@ -89,65 +89,61 @@ class GoalPubNode:
         rospy.Subscriber('/move_base/result',MoveBaseActionResult,self.result_CB)
         # rospy.Subscriber('/scout_status',ScoutStatus,self.scout_CB)
         pass
-    
-    # 도착해야 할 지점들의 위치 순서대로 등록(x,y,z)
+
+    ''' check point list
+    # 4-5 between (check)
+    self.goal_lst.append(Point(17.49,20.55,0))
+
+    # 5th lecture room (check)
+    self.goal_lst.append(Point(15.73,20.69,0))
+
+    # center (check)  
+    self.goal_lst.append(Point(14.21,31.98,0))
+
+    # end point (check)
+    self.goal_lst.append(Point(21.21,19.43,0))
+
+    # mission 1 1st (parking)
+    self.goal_lst.append(Point(18.78,16.36,0))
+
+    # mission 1 last (parking)
+    self.goal_lst.append(Point(5.78,30.16,0))
+        
+    '''
     def init_goal_lst(self,start_point_number):
-
-        # 5th lecture room
-        self.goal_lst.append(Point(14.34,16.93,0))
-
-        # azit desk
-        self.goal_lst.append(Point(11.58,48.41,0))
-
-        # center (mirror)
-        self.goal_lst.append(Point(13.56,33.16,0))
-
-        # card desk
-        self.goal_lst.append(Point(5.70,37.54,0))
-
-        # parking spot
-        self.goal_lst.append(Point(5.77,29.97,0))
-
-        # coffee room
-        self.goal_lst.append(Point(14.14,26.34,0))
-
-        # end point
+    # 도착해야 할 지점들의 위치 순서대로 등록(x,y,z)
+        # end point (check)
         self.goal_lst.append(Point(21.21,19.43,0))
-
-        # 4-5 between
-        # self.goal_lst.append(Point(17.47,21.10,0))
-
-
        
         
         self.cur_goal.position = self.goal_lst[start_point_number]  
         self.init_goal_ori(start_point_number)
+
+    ''' check point
+     # 4-5 between (check)
+    self.ori_lst.append(Quaternion(0,0,0.82,0.56))
     
+    # 5th lecture room (check)
+    self.ori_lst.append(Quaternion(0,0,0.8,0.59))
+
+    # center (check)  
+    self.ori_lst.append(Quaternion(0,0,0.79,0.61))
+
+    # end point (check)
+    self.ori_lst.append(Quaternion(0,0,0.84,0.52))
+
+    # mission 1 1st (parking)
+    self.ori_lst.append(Quaternion(0,0,-0.67,0.73))
+
+    # mission 1 last (parking)
+    self.ori_lst.append(Quaternion(0,0,-0.98,0.15))
+    '''
     # 도착해야 할 지점들의 자세 순서대로 등록(x,y,z,w)
     def init_goal_ori(self,start_point_number):
-        # 5th lecture room
-        self.ori_lst.append(Quaternion(0,0,-0.67,0.74))
-        # azit desk
-        self.ori_lst.append(Quaternion(0,0,0.10,0.99))
 
-        # center (mirror)
-        self.ori_lst.append(Quaternion(0,0,0.74,0.67))
-
-        # card desk
-        self.ori_lst.append(Quaternion(0,0,-0.61,0.78))
-
-        # parking spot
-        self.ori_lst.append(Quaternion(0,0,-0.17,0.98))
-
-        # coffee room
-        self.ori_lst.append(Quaternion(0,0,-0.47,0.88))
-
-        # end point
+    
+        # end point (check)
         self.ori_lst.append(Quaternion(0,0,0.84,0.52))
-
-
-        # 4-5 between
-        # self.ori_lst.append(Quaternion(0,0,-0.58,0.80))
 
         self.LENGTH = len(self.ori_lst)
         self.cur_goal.orientation = self.ori_lst[start_point_number]
@@ -222,14 +218,9 @@ class GoalPubNode:
             self.cancel_pub.publish(finish_goal)
             self.is_stop = True
 
-            if self.idx == 1:
-                self.dist_TH = 0.3
-            elif self.idx == 2:
-                self.dist_TH = 0.15
-            
-            if not self.idx == 2 :
-                rospy.loginfo('sleep 2sec')
-                rospy.sleep(2.0)
+            if self.idx not in [0,2,4,6,8,9] :
+                rospy.loginfo('sleep 1.8sec')
+                rospy.sleep(1.8)
 
             self.service.request()
             # if self.idx == 0:                
@@ -241,39 +232,6 @@ class GoalPubNode:
             #     rospy.set_param('/move_base/local_costmap/width',6.5)
             #     rospy.set_param('/move_base/local_costmap/height',6.5)
             #     self.dist_TH = 0.1
-
-            # elif self.idx == 1:
-            #     rospy.loginfo('sleep 5sec')
-            #     rospy.sleep(5.0) 
-            #     rospy.loginfo('sleep end')
-            #     rospy.set_param('/move_base/DWAPlanerROS/xy_goal_tolerance',0.15)
-            #     rospy.set_param('/move_base/DWAPlanerROS/yaw_goal_tolerance',0.1)
-
-            #     self.dist_TH = 0.2
-
-
-
-            # elif self.idx == self.LENGTH-3: # Azit
-            #     rospy.set_param('/move_base/DWAPlannerROS/max_vel_x',1.1)
-            #     rospy.set_param('/move_base/DWAPlannerROS/min_vel_x',-1.1)
-            #     rospy.set_param('/move_base/DWAPlannerROS/max_vel_trans',1.1)
-            #     rospy.set_param('/move_base/DWAPlannerROS/min_vel_trans',-1.1)
-            #     rospy.set_param('/move_base/DWAPlannerROS/acc_lim_x',1.5)
-            #     rospy.set_param('/move_base/DWAPlannerROS/acc_lim_theta',1.0)
-
-
-            # elif self.idx == self.LENGTH-2: # card
-            #     rospy.set_param('/move_base/local_costmap/width',4.5)
-            #     rospy.set_param('/move_base/local_costmap/height',4.5)
-            #     rospy.set_param('/move_base/DWAPlannerROS/max_vel_x',1.5)
-            #     rospy.set_param('/move_base/DWAPlannerROS/min_vel_x',-1.5)
-            #     rospy.set_param('/move_base/DWAPlannerROS/max_vel_trans',1.5)
-            #     rospy.set_param('/move_base/DWAPlannerROS/min_vel_trans',-1.5)
-            #     rospy.set_param('/move_base/DWAPlannerROS/acc_lim_x',2.0)
-            #     rospy.set_param('/move_base/DWAPlannerROS/acc_lim_theta',1.0)
-            #     rospy.set_param('/move_base/DWAPlanerROS/xy_goal_tolerance',0.05)
-            #     self.dist_TH = 0.1
-
 
             self.idx +=1
             

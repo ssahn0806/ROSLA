@@ -93,17 +93,15 @@ class GoalPubNode:
     # 도착해야 할 지점들의 위치 순서대로 등록(x,y,z)
     def init_goal_lst(self,start_point_number):
         # 1st parking
-        # self.goal_lst.append(Point(0.8655,11.5951,0.0))
-        # self.goal_lst.append(Point(18.9522,15.9508,0.0))
-        self.goal_lst.append(Point(18.8743,16.1035,0.0))
+        self.goal_lst.append(Point(18.8437,16.2218,0.0))
 
 
 
         # 2nd parking
-        # self.goal_lst.append(Point(-2.3962,8.1772,0)) # -2.57, 8.12
-        # self.goal_lst.append(Point(22.3011,19.7824,0)) # 22.3027, 19.7786
-        # self.goal_lst.append(Point(22.17541,19.8921,0)) # 22.3027, 19.7786
-        self.goal_lst.append(Point(22.3091,19.7502,0)) # -2.57, 8.12
+        self.goal_lst.append(Point(22.2646,19.7855,0)) # -2.57, 8.12
+        # self.goal_lst.append(Point(22.05,19.94,0)) # -2.57, 8.12
+
+
 
 
 
@@ -140,9 +138,9 @@ class GoalPubNode:
 
 
         # End Point
-        # self.goal_lst.append(Point(13.0533,-2.3557,0)) # 12.92 , -2.27
-        # self.goal_lst.append(Point(12.79,-2.06,0)) # 12.92 , -2.27
-        self.goal_lst.append(Point(5.90,29.82,0)) # 12.92 , -2.27
+        # self.goal_lst.append(Point(5.71,29.97,0)) # 12.92 , -2.27
+        self.goal_lst.append(Point(5.80,30.12,0)) # 12.92 , -2.27
+
 
 
         
@@ -155,19 +153,17 @@ class GoalPubNode:
     # 도착해야 할 지점들의 자세 순서대로 등록(x,y,z,w)
     def init_goal_ori(self,start_point_number):
         # 1st parking
+        self.ori_lst.append(Quaternion(0,0,-0.5971,0.8021))
 
-        # self.ori_lst.append(Quaternion(0,0,0.7381,0.6746))
-        # self.ori_lst.append(Quaternion(0,0,-0.5808,0.8140))
-        self.ori_lst.append(Quaternion(0,0,-0.5892,0.8079))
 
 
 
 
         # 2nd parking
-        # self.ori_lst.append(Quaternion(0,0,-0.6287,0.7775))
         self.ori_lst.append(Quaternion(0,0,0.83,0.55))
-        # self.ori_lst.append(Quaternion(0,0,-0.9823,0.1873))
-        # self.ori_lst.append(Quaternion(0,0,0.8357,0.5491))
+
+        # self.ori_lst.append(Quaternion(0,0,-0.59,0.80))
+
 
 
 
@@ -199,8 +195,9 @@ class GoalPubNode:
 
 
         # End Point
-        # self.ori_lst.append(Quaternion(0,0,-0.95,0.30))
-        self.ori_lst.append(Quaternion(0,0,0.17,0.98))
+        # self.ori_lst.append(Quaternion(0,0,0.99,-0.09))
+        self.ori_lst.append(Quaternion(0,0,-0.98,0.18))
+
 
 
 
@@ -297,18 +294,27 @@ class GoalPubNode:
 
                 self.dist_TH = 0.2
 
-
-
-            elif self.idx == self.LENGTH-3: # Azit
-                rospy.set_param('/move_base/DWAPlannerROS/max_vel_x',1.1)
-                rospy.set_param('/move_base/DWAPlannerROS/min_vel_x',-1.1)
-                rospy.set_param('/move_base/DWAPlannerROS/max_vel_trans',1.1)
-                rospy.set_param('/move_base/DWAPlannerROS/min_vel_trans',-1.1)
+            elif self.idx == 2:
+                rospy.set_param('/move_base/DWAPlannerROS/max_vel_x',1.5)
+                rospy.set_param('/move_base/DWAPlannerROS/min_vel_x',-1.5)
+                rospy.set_param('/move_base/DWAPlannerROS/max_vel_trans',1.5)
+                rospy.set_param('/move_base/DWAPlannerROS/min_vel_trans',-1.5)
                 rospy.set_param('/move_base/DWAPlannerROS/acc_lim_x',1.5)
                 rospy.set_param('/move_base/DWAPlannerROS/acc_lim_theta',1.0)
+                rospy.set_param('/move_base/local_costmap/width',4.5)
+                rospy.set_param('/move_base/local_costmap/height',4.5)
 
 
-            elif self.idx == self.LENGTH-2: # card
+            elif self.idx == 3: # Azit
+                rospy.set_param('/move_base/DWAPlannerROS/max_vel_x',1.0)
+                rospy.set_param('/move_base/DWAPlannerROS/min_vel_x',-1.0)
+                rospy.set_param('/move_base/DWAPlannerROS/max_vel_trans',1.0)
+                rospy.set_param('/move_base/DWAPlannerROS/min_vel_trans',-1.0)
+                rospy.set_param('/move_base/DWAPlannerROS/acc_lim_x',1.2)
+                rospy.set_param('/move_base/DWAPlannerROS/acc_lim_theta',0.8)
+
+
+            elif self.idx == 4: # card
                 rospy.set_param('/move_base/local_costmap/width',4.5)
                 rospy.set_param('/move_base/local_costmap/height',4.5)
                 rospy.set_param('/move_base/DWAPlannerROS/max_vel_x',1.5)
