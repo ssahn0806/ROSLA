@@ -8,7 +8,7 @@
 
 - [안승수](https://github.com/ssahn0806) : 로봇 구동을 위한 알고리즘 수정 및 개발
 - [전우성](https://github.com/jws0806) : 실제 로봇 구동을 위한 업무 수행 및 로봇 관리
-- 김유경 : 전략 실행을 위한 자료조사 및 진행상황 기록
+- [김유경](https://kr.linkedin.com/in/yookyung-kim-a9b417121) : 전략 실행을 위한 자료조사 및 진행상황 기록
 - [이동현](https://github.com/hyunkidong) : 문제 해결과 성능 개선을 위한 전략 수립
 
 > ## My Role 🙋‍♂️
