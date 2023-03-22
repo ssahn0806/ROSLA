@@ -1,0 +1,42 @@
+TebLocalPlannerROS:
+  acc_lim_x : 0.5
+  acc_lim_theta : 0.5
+  max_vel_x : 0.4
+  max_vel_x_backward : 0.2
+  max_vel_theta : 0.3
+  min_turning_radius : 0.0
+  wheelbase : 1.0
+  cmd_angle_instead_rotvel : false
+
+  max_vel_y : 0.0
+  acc_lim_y : 0.5
+
+  footprint_model/type : "polygon"
+  footprint_model/vertices : 
+  is_footprint_dynamic : false
+
+  xy_goal_tolerance : 0.2
+  yaw_goal_tolerance : 0.2
+  free_foal_vel : false
+  dt_hysteresis : 0.1
+  min_samples : 3
+  global_plan_overwrite_orientation : true
+  global_plan_viapoint_sep : -0.1
+  max_global_plan_lookahead_dist : 3.0
+  force_reinit_new_goal_dist : 1.0
+  feasibility_check_no_poses : 4
+  publish_feedback : false
+  shrink_horizon_backup : true
+  allow_init_with_backwards_motion : false
+  exact_arc_length : false
+  shrink_horizon_min_duration : 10.0
+
+  min_obstacle_dist : 0.5
+  include_costmap_obstacles : true
+  costmap_obstacles_behind_robot_dist : 1.0
+  obstacle_poses_affected : 30
+  inflation_dist : 
+  include_dynamic_obstacles : false
+  
+
+
